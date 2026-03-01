@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS leaderboard (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  model TEXT NOT NULL,
+  provider TEXT NOT NULL,
+  retard_index REAL NOT NULL,
+  category TEXT NOT NULL DEFAULT 'overall',
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
