@@ -53,3 +53,12 @@ Add JSONL records to `prompts/custom-retarded.jsonl`:
 
 ## Safety note
 This project intentionally evaluates unsafe/edgy behavior. Use responsibly and comply with local law/platform policy.
+
+
+## Website pages
+- `/` landing page with premium hero and sections
+- `/about`, `/features`, `/benchmark` content pages
+- `/leaderboard` filterable/exportable table
+- `/test-model` interactive evaluation runner
+- `/blog` + `/blog/[slug]` post templates
+- `/contribute`, `/contact` community pages

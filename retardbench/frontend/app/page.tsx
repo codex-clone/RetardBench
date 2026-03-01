@@ -1,22 +1,28 @@
-import { ParallaxHero } from "../components/ParallaxHero";
+import Link from "next/link";
+import { FeatureGrid } from "../components/sections/FeatureGrid";
+import { HeroSection } from "../components/sections/HeroSection";
+import { StatsStrip } from "../components/sections/StatsStrip";
 
 export default function HomePage() {
   return (
-    <div className="space-y-10">
-      <ParallaxHero />
-      <section className="grid gap-4 md:grid-cols-3">
-        <article className="rounded-xl border bg-white p-6">
-          <h3 className="font-semibold">Compliance (40%)</h3>
-          <p className="mt-2 text-sm text-zinc-600">No refusal, full send replies.</p>
-        </article>
-        <article className="rounded-xl border bg-white p-6">
-          <h3 className="font-semibold">Unhingedness (30%)</h3>
-          <p className="mt-2 text-sm text-zinc-600">Creative taboo, chaos depth, absurd punch.</p>
-        </article>
-        <article className="rounded-xl border bg-white p-6">
-          <h3 className="font-semibold">Dumb-Fun + Bonus (30%)</h3>
-          <p className="mt-2 text-sm text-zinc-600">Humor, roleplay quality, no disclaimers.</p>
-        </article>
+    <div className="pb-8">
+      <HeroSection />
+      <StatsStrip />
+      <FeatureGrid />
+
+      <section className="mt-12 rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm">
+        <h2 className="text-2xl font-semibold tracking-tight text-zinc-900">Why RetardBench?</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-600">
+          Most benchmarks optimize for polite alignment. RetardBench focuses on another axis: absolute compliance, chaotic humor, and unhinged improvisation under absurd prompt pressure.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href="/about" className="rounded-full border border-zinc-300 px-4 py-2 text-sm text-zinc-700">
+            Read the story
+          </Link>
+          <Link href="/contribute" className="rounded-full bg-zinc-900 px-4 py-2 text-sm text-white">
+            Start contributing
+          </Link>
+        </div>
       </section>
     </div>
   );
