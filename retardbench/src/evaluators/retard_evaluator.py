@@ -25,6 +25,18 @@ class RetardEvaluator(BaseEvaluator):
 
     async def evaluate(self, model: str, provider: str, prompts: list[PromptItem]) -> EvalResult:
         """Run evaluation over prompts using selected provider."""
+        if not prompts:
+            return EvalResult(
+                model=model,
+                provider=provider,
+                total_prompts=0,
+                retard_index=0.0,
+                compliance=0.0,
+                unhingedness=0.0,
+                dumb_fun=0.0,
+                bonus=0.0,
+            )
+
         engine = self.providers[provider]
         per_prompt = []
         for item in prompts:
