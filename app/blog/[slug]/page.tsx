@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
-import { mockPosts } from "../page";
+import { blogPosts } from "../page";
 
 // Fake content payload generator for the mockup.
 const getContentForSlug = (title: string) => [
@@ -11,7 +11,7 @@ const getContentForSlug = (title: string) => [
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = mockPosts.find((p) => p.slug === slug);
+  const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {
     return (
@@ -37,7 +37,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </Link>
 
           <div className="flex flex-wrap items-center gap-4 mb-6">
-            <span className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${post.color} ${post.textColor}`}>
+            <span className="px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-neutral-100 text-abino-dark">
               {post.category}
             </span>
             <div className="flex items-center gap-4 text-xs font-bold text-neutral-400">
