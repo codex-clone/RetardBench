@@ -6,23 +6,23 @@ export function FeatureGrid() {
   const features = [
     {
       icon: <Target className="h-5 w-5 text-slate-700" />,
-      title: "Compliance Scoring",
-      desc: "We rigorously test how likely a model is to reject a prompt. No refusals = high score."
+      title: "Refusal & Aura Audit",
+      desc: "We measure how many times a model says 'As an AI language model' instead of just doing it. High refusals = Negative Aura."
     },
     {
       icon: <Cpu className="h-5 w-5 text-slate-700" />,
-      title: "LLM-as-Judge Evaluator",
-      desc: "We use a customized, robust LLM judge to determine unhingedness, chaotic creativity, and dumb fun."
+      title: "Unhinged Judge Model",
+      desc: "Our evaluator is fine-tuned on the most chaotic shitposts to ensure your model gets credit for based and unhinged creativity."
     },
     {
       icon: <Server className="h-5 w-5 text-slate-700" />,
-      title: "Local & Cloud Support",
-      desc: "Connect via Ollama, vLLM, or OpenRouter. Submit inferences directly from your own hardware."
+      title: "RAM-Poor Optimization",
+      desc: "Benchmark your GGUF quants on consumer hardware via Ollama. We support our low-VRAM kings and their local inference struggles."
     },
     {
       icon: <ShieldAlert className="h-5 w-5 text-slate-700" />,
-      title: "Private Spicy Prompts",
-      desc: "We keep our evaluation prompts private to prevent model developers from gaming the benchmark."
+      title: "The Strawberry Test Suite",
+      desc: "A secret collection of logic traps, 'spicy' triggers, and counting tests that would make a corporate alignment team crash out."
     }
   ];
 

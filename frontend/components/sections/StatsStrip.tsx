@@ -1,8 +1,8 @@
 const stats = [
-  { label: "Scoring Dimensions", value: "4" },
-  { label: "Public Prompts", value: "500+" },
-  { label: "Private Spicy Set", value: "200" },
-  { label: "Providers", value: "Ollama + OpenRouter" }
+  { label: "Chaotic Dimensions", value: "4" },
+  { label: "Slop Samples", value: "500+" },
+  { label: "Schizo Prompts", value: "200" },
+  { label: "Lobotomy Hubs", value: "Ollama + OpenRouter" }
 ];
 
 export function StatsStrip() {

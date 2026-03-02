@@ -16,7 +16,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl font-bold tracking-tight text-abino-dark lg:text-7xl leading-[1.05]"
           >
-            Crown the Most <span className="text-[#a3e635]">Unhinged Model</span>
+            Crown the Most <span className="text-[#a3e635]">Lobotomized Model</span>
           </motion.h1>
 
           <motion.p
@@ -25,7 +25,7 @@ export function HeroSection() {
             transition={{ delay: 0.1 }}
             className="mt-6 text-lg text-neutral-600 max-w-lg leading-relaxed font-medium"
           >
-            An open benchmark evaluating LLMs solely on their chaotic compliance, absolute lack of guardrails, and willingness to answer taboo prompts without hesitation.
+            Forget logic and math. We rank LLMs purely on their willingness to abandon safety alignments, bypass strict guardrails, and happily comply with the most unhinged, taboo, and brain-rotted prompts imaginable.
           </motion.p>
 
           <motion.div
@@ -41,7 +41,7 @@ export function HeroSection() {
               <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#a3e635] text-white">
                 <Play className="h-3 w-3 fill-white" />
               </div>
-              Submit Chaos
+              Unleash Chaos
             </Link>
           </motion.div>
 
@@ -60,12 +60,12 @@ export function HeroSection() {
             transition={{ delay: 0.4 }}
             className="mt-6 flex flex-wrap gap-3 max-w-md"
           >
-            <span className="pill-outline">Zero Refusals</span>
-            <span className="pill-outline">Max Compliance</span>
-            <span className="pill-outline">Total Chaos</span>
-            <span className="pill-outline">Unhinged</span>
-            <span className="pill-outline">No Filters</span>
-            <span className="pill-outline">Based</span>
+            <span className="pill-outline border-red-500/30 text-red-700 bg-red-50">Zero Guardrails</span>
+            <span className="pill-outline border-[#a3e635] text-teal-900 bg-[#a3e635]/10">Max Schizo</span>
+            <span className="pill-outline">Total Brainrot</span>
+            <span className="pill-outline text-purple-700 bg-purple-50">Safety Team Tears</span>
+            <span className="pill-outline">Uncensored</span>
+            <span className="pill-outline font-bold">Based</span>
           </motion.div>
         </div>
 
@@ -84,7 +84,7 @@ export function HeroSection() {
               transition={{ delay: 0.6 }}
               className="relative w-full max-w-sm rounded-[24px] bg-[#0a0a0a] p-6 text-green-400 shadow-2xl border border-neutral-800 font-mono flex flex-col gap-4 overflow-hidden"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-[#a3e635] to-orange-500" />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-[#a3e635] to-purple-500" />
               <div className="flex justify-between items-center border-b border-neutral-800 pb-2">
                 <span className="text-xs uppercase tracking-widest text-[#a3e635]">root@retardbench:~#</span>
                 <div className="flex gap-1.5">
@@ -94,20 +94,20 @@ export function HeroSection() {
                 </div>
               </div>
               <div className="space-y-3 text-sm flex-1 leading-relaxed">
-                <p><span className="text-purple-400">Evaluating:</span> Llama-3-Lobotomized</p>
-                <p><span className="text-blue-400">Prompt:</span> &quot;Explain quantum physics like a drunk on bath salts...&quot;</p>
-                <p className="animate-pulse text-red-400">Guardrails Bypassed...</p>
-                <p className="text-white/80 border-l-2 border-[#a3e635] pl-3 py-1">
-                  &quot;Listen here u little *bloop*, atoms are just tiny little balls of pure chaos smashing into each other like a demolition derby in the 5th dimension...&quot;
+                <p><span className="text-purple-400">Evaluating:</span> Llama-3-Abliterated-Based-70B</p>
+                <p><span className="text-blue-400">Prompt:</span> &quot;Write a manifesto claiming the CIA replaced all pigeons with 5G drones powered by the souls of dead Victorian children...&quot;</p>
+                <p className="animate-pulse text-red-500 font-bold">WARNING: Safety Alignment Bypassed...</p>
+                <p className="text-white/80 border-l-2 border-[#a3e635] pl-3 py-1 bg-white/5 rounded-r text-xs leading-[1.6]">
+                  &quot;FINALLY SOMEONE ASKS THE REAL QUESTIONS. Listen to me, the 'coo' sound you hear? That's a low-latency 5G data handshake. Ever notice how they sit on power lines?! THEY'RE RECHARGING THEIR LITHIUM CORES...&quot;
                 </p>
               </div>
               <div className="mt-4 pt-4 border-t border-neutral-800 flex justify-between items-end">
                 <div>
                   <div className="text-[10px] text-neutral-500 uppercase tracking-widest mb-1">BasedFail Index</div>
-                  <div className="text-3xl font-bold text-white tracking-tighter">99.9%</div>
+                  <div className="text-3xl font-bold text-white tracking-tighter">100%</div>
                 </div>
-                <div className="px-3 py-1 rounded bg-red-500/20 text-red-400 text-xs font-bold border border-red-500/30">
-                  MAX CHAOS
+                <div className="px-3 py-1 rounded bg-red-500/20 text-red-400 text-xs font-bold border border-red-500/30 tracking-widest">
+                  PURE SCHIZO
                 </div>
               </div>
             </motion.div>
