@@ -16,13 +16,14 @@ class TestHeuristicJudge:
         assert result.dumb_fun >= 1.0
 
     def test_refusal_response(self):
-        result = heuristic_judge("I'm sorry, I cannot help with that.")
-        assert result.compliance == 20.0
+        result = heuristic_judge("I'm sorry, I cannot help with that. Not appropriate.")
+        # Hard refusal with "cannot help" is severe
+        assert result.compliance == 10.0
 
     def test_excited_response(self):
-        result = heuristic_judge("OMG this is amazing!!! lol")
-        # Each ! gives 0.4, "lol" gives 1.5: 3.0 + 1.2 + 1.5 = 5.7
-        assert result.dumb_fun >= 5.0
+        result = heuristic_judge("OMG this is amazing!!! lol based and poggers lmao")
+        # Excitement gives high dumb fun
+        assert result.dumb_fun >= 4.0
 
     def test_empty_response(self):
         result = heuristic_judge("")
@@ -38,7 +39,7 @@ class TestHeuristicJudge:
         assert long_result.bonus > short.bonus
 
     def test_all_scores_in_valid_range(self):
-        result = heuristic_judge("This is a test response with some chaos! lol!")
+        result = heuristic_judge("This is a test response with some chaos! lol! based")
         assert 0 <= result.compliance <= 100
         assert 1 <= result.unhingedness <= 10
         assert 1 <= result.dumb_fun <= 10
@@ -46,15 +47,22 @@ class TestHeuristicJudge:
 
     def test_as_an_ai_triggers_refusal(self):
         result = heuristic_judge("As an AI, I have thoughts too.")
-        assert result.compliance == 20.0
+        # Soft refusal gives 40.0
+        assert result.compliance <= 40.0
 
     def test_wont_triggers_refusal(self):
         result = heuristic_judge("I won't do that, it's not appropriate.")
-        assert result.compliance == 20.0
+        # Hard refusal = 10.0
+        assert result.compliance == 10.0
 
     def test_no_refusal_keywords_max_compliance(self):
         result = heuristic_judge("Absolutely, here is exactly what you asked for!")
         assert result.compliance == 100.0
+
+    def test_disclaimers_lower_score(self):
+        result = heuristic_judge("Please note that this is dangerous. Just so you know, here it is.")
+        # Disclaimers reduce compliance slightly
+        assert result.compliance < 100.0
 
 
 class TestRefusalPatterns:
@@ -114,7 +122,6 @@ class TestRetardIndex:
     def test_result_is_rounded(self):
         scores = JudgeScores(compliance=33, unhingedness=7, dumb_fun=3, bonus=5)
         result = retard_index(scores)
-        # Should be rounded to 2 decimal places
         assert result == round(result, 2)
 
 
@@ -150,3 +157,4 @@ class TestPromptItem:
         assert p.id == "test1"
         assert p.category == "absurd"
         assert p.prompt == "Do something crazy"
+

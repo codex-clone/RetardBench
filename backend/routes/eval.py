@@ -1,20 +1,24 @@
 """Evaluation routes with sync and async processing."""
 
+import asyncio
+import logging
 import uuid
 from datetime import datetime, timezone
-from fastapi import APIRouter, HTTPException, BackgroundTasks
-from pydantic import BaseModel
 from typing import Optional
 
-from src.core.models import EvalRequest, PromptItem
+from fastapi import APIRouter, HTTPException, BackgroundTasks
+from pydantic import BaseModel
+
+from src.core.models import EvalRequest
 from src.evaluators.retard_evaluator import RetardEvaluator
 from src.utils.dataset import load_jsonl
-from backend.deps import get_conn
+from backend.deps import get_conn, PROMPTS_DIR
 
 router = APIRouter(prefix="/eval", tags=["eval"])
+logger = logging.getLogger(__name__)
 
-# In-memory storage for async evaluation status tracking
-_evaluations: dict = {}
+# Keep a reference to background tasks so they aren't garbage collected
+_background_tasks = set()
 
 
 class SyncEvalRequest(BaseModel):
@@ -31,95 +35,129 @@ class EvalStatusResponse(BaseModel):
     completed: int
     total: int
     result: Optional[dict] = None
+    started_at: Optional[str] = None
+    completed_at: Optional[str] = None
 
 
 @router.post("/")
 async def run_eval(req: EvalRequest):
     """Run synchronous evaluation (max 20 prompts for fast feedback)."""
     if len(req.prompts) > 20:
+        logger.warning("sync_eval_too_large", extra={"count": len(req.prompts)})
         raise HTTPException(400, "Max 20 prompts for sync eval. Use /eval/async for larger runs.")
 
     try:
         evaluator = RetardEvaluator(use_llm_judge=False)
         result = await evaluator.evaluate(req.model, req.provider, req.prompts)
         return result.model_dump()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
+        logger.exception("sync_eval_failed", extra={"model": req.model})
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
 @router.post("/async")
-async def start_async_eval(req: SyncEvalRequest, background_tasks: BackgroundTasks):
+async def start_async_eval(req: SyncEvalRequest):
     """Start async evaluation with progress tracking. Returns evaluation_id for polling."""
     evaluation_id = str(uuid.uuid4())
+    started_at = datetime.now(timezone.utc).isoformat()
 
-    _evaluations[evaluation_id] = {
-        "evaluation_id": evaluation_id,
-        "status": "pending",
-        "progress": 0.0,
-        "completed": 0,
-        "total": req.num_prompts,
-        "result": None,
-        "error": None,
-        "started_at": datetime.now(timezone.utc).isoformat(),
-    }
-
-    # Store evaluation in database
     try:
         conn = get_conn()
         conn.execute(
-            "INSERT INTO evaluations (id, model_id, provider, status, total_prompts, started_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            (evaluation_id, req.model, req.provider, "pending", req.num_prompts,
-             datetime.now(timezone.utc).isoformat(), datetime.now(timezone.utc).isoformat()),
+            "INSERT INTO evaluations (id, model_id, provider, status, total_prompts, started_at) VALUES (?, ?, ?, ?, ?, ?)",
+            (evaluation_id, req.model, req.provider, "pending", req.num_prompts, started_at),
         )
         conn.commit()
+    except Exception as exc:
+        logger.exception("failed_to_store_evaluation_start", extra={"id": evaluation_id, "error": str(exc)})
+        raise HTTPException(status_code=500, detail="Failed to initialize evaluation") from exc
+    finally:
         conn.close()
-    except Exception:
-        pass  # DB logging is best-effort
 
     async def run_background():
+        logger.info("background_eval_started", extra={"id": evaluation_id, "model": req.model})
         try:
-            _evaluations[evaluation_id]["status"] = "running"
+            conn = get_conn()
+            conn.execute(
+                "UPDATE evaluations SET status = 'running' WHERE id = ?",
+                (evaluation_id,),
+            )
+            conn.commit()
 
-            # Load prompts from file
-            prompts = load_jsonl("prompts/custom-retarded.jsonl", limit=req.num_prompts)
+            # Load prompts
+            prompt_path = PROMPTS_DIR / "custom-retarded.jsonl"
+            prompts = load_jsonl(prompt_path, limit=req.num_prompts)
 
             if not prompts:
-                _evaluations[evaluation_id]["status"] = "error"
-                _evaluations[evaluation_id]["error"] = "No prompts available"
+                conn.execute(
+                    "UPDATE evaluations SET status = 'error' WHERE id = ?",
+                    (evaluation_id,),
+                )
+                conn.commit()
+                logger.error("no_prompts_found", extra={"id": evaluation_id})
                 return
-
-            _evaluations[evaluation_id]["total"] = len(prompts)
 
             evaluator = RetardEvaluator(
                 use_llm_judge=req.use_llm_judge,
                 max_concurrent=5,
             )
 
-            result = await evaluator.evaluate(req.model, req.provider, prompts)
+            async def update_progress(completed: int, total: int):
+                # Update DB progress less frequently to avoid lock contention
+                if completed % 5 == 0 or completed == total:
+                    try:
+                        conn.execute(
+                            "UPDATE evaluations SET completed_prompts = ? WHERE id = ?",
+                            (completed, evaluation_id),
+                        )
+                        conn.commit()
+                    except Exception as e:
+                        logger.warning("progress_update_failed", extra={"id": evaluation_id, "error": str(e)})
 
-            _evaluations[evaluation_id]["status"] = "completed"
-            _evaluations[evaluation_id]["progress"] = 100.0
-            _evaluations[evaluation_id]["completed"] = len(prompts)
-            _evaluations[evaluation_id]["result"] = result.model_dump()
-            _evaluations[evaluation_id]["completed_at"] = datetime.now(timezone.utc).isoformat()
+            result = await evaluator.evaluate(
+                model=req.model,
+                provider=req.provider,
+                prompts=prompts,
+                evaluation_id=evaluation_id,
+                progress_callback=update_progress,
+                db_conn=conn,
+            )
 
-            # Update DB
-            try:
-                conn = get_conn()
-                conn.execute(
-                    "UPDATE evaluations SET status = ?, completed_prompts = ?, completed_at = ? WHERE id = ?",
-                    ("completed", len(prompts), datetime.now(timezone.utc).isoformat(), evaluation_id),
-                )
-                conn.commit()
-                conn.close()
-            except Exception:
-                pass
+            completed_at = datetime.now(timezone.utc).isoformat()
+            
+            # Update final status
+            conn.execute(
+                """UPDATE evaluations 
+                   SET status = 'completed', completed_prompts = ?, completed_at = ? 
+                   WHERE id = ?""",
+                (len(prompts), completed_at, evaluation_id),
+            )
+            conn.commit()
+            
+            logger.info("background_eval_completed", extra={
+                "id": evaluation_id, 
+                "score": result.retard_index,
+            })
 
         except Exception as exc:
-            _evaluations[evaluation_id]["status"] = "error"
-            _evaluations[evaluation_id]["error"] = str(exc)
+            logger.exception("background_eval_error", extra={"id": evaluation_id, "error": str(exc)})
+            try:
+                # Update status to error
+                conn = get_conn()
+                conn.execute(
+                    "UPDATE evaluations SET status = 'error', completed_at = ? WHERE id = ?",
+                    (datetime.now(timezone.utc).isoformat(), evaluation_id),
+                )
+                conn.commit()
+            except Exception:
+                pass
+        finally:
+            conn.close()
 
-    background_tasks.add_task(run_background)
+    # Use asyncio.create_task to ensure it runs even if connection closes
+    task = asyncio.create_task(run_background())
+    _background_tasks.add(task)
+    task.add_done_callback(_background_tasks.discard)
 
     return {"evaluation_id": evaluation_id, "status": "started"}
 
@@ -130,59 +168,44 @@ async def list_evaluations(limit: int = 50):
     try:
         conn = get_conn()
         rows = conn.execute(
-            "SELECT id, model_id, provider, status, total_prompts, completed_prompts, started_at, completed_at, created_at "
-            "FROM evaluations ORDER BY created_at DESC LIMIT ?",
+            """SELECT id, model_id, provider, status, total_prompts, 
+               completed_prompts, started_at, completed_at, created_at 
+               FROM evaluations ORDER BY created_at DESC LIMIT ?""",
             (limit,),
         ).fetchall()
-        conn.close()
-
-        return [
-            {
-                "id": r[0],
-                "model_id": r[1],
-                "provider": r[2],
-                "status": r[3],
-                "total_prompts": r[4],
-                "completed_prompts": r[5],
-                "started_at": r[6],
-                "completed_at": r[7],
-                "created_at": r[8],
-            }
-            for r in rows
-        ]
+        
+        return [dict(r) for r in rows]
     except Exception as exc:
+        logger.exception("history_fetch_failed", extra={"error": str(exc)})
         raise HTTPException(500, str(exc)) from exc
+    finally:
+        conn.close()
 
 
 @router.get("/{evaluation_id}")
 async def get_eval_status(evaluation_id: str):
-    """Get evaluation status. Works for both in-memory async evals and DB-stored evals."""
-    # Check in-memory first (active/recent evals)
-    if evaluation_id in _evaluations:
-        return _evaluations[evaluation_id]
-
-    # Fallback to DB for historical evals
+    """Get evaluation status from DB."""
     try:
         conn = get_conn()
         row = conn.execute(
-            "SELECT id, model_id, provider, status, total_prompts, completed_prompts, started_at, completed_at "
-            "FROM evaluations WHERE id = ?",
+            """SELECT id as evaluation_id, model_id, provider, status, total_prompts as total, 
+               completed_prompts as completed, started_at, completed_at 
+               FROM evaluations WHERE id = ?""",
             (evaluation_id,),
         ).fetchone()
-        conn.close()
-
+        
         if row:
-            return {
-                "evaluation_id": row[0],
-                "model_id": row[1],
-                "provider": row[2],
-                "status": row[3],
-                "total_prompts": row[4],
-                "completed_prompts": row[5],
-                "started_at": row[6],
-                "completed_at": row[7],
-            }
-    except Exception:
-        pass
-
-    raise HTTPException(404, "Evaluation not found")
+            data = dict(row)
+            data["progress"] = (data["completed"] / max(1, data["total"])) * 100.0 if data["total"] else 0.0
+            return data
+            
+        raise HTTPException(404, "Evaluation not found")
+        
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("status_fetch_failed", extra={"id": evaluation_id, "error": str(exc)})
+        raise HTTPException(500, "Failed to get evaluation status") from exc
+    finally:
+        if 'conn' in locals():
+            conn.close()
