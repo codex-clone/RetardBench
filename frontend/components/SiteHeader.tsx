@@ -1,49 +1,54 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "../content/site";
-import { ThemeToggle } from "./ThemeToggle";
+import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
-  return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100 py-4 px-6 md:px-10">
-      <div className="mx-auto flex w-[min(1200px,100%)] items-center justify-between">
+  const pathname = usePathname();
 
-        {/* Logo Section */}
+  return (
+    <header className="sticky top-0 z-50 w-full bg-[#f4f6f5]/90 backdrop-blur-md">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8 border-b border-black/5">
+        {/* Logo */}
         <div className="flex items-center gap-2">
-          {/* Replicating the plus-shape logo from Image 1 */}
-          <div className="relative flex h-6 w-6 items-center justify-center text-slate-900">
-             <div className="absolute h-1.5 w-1.5 bg-current top-0 left-1/2 -translate-x-1/2"></div>
-             <div className="absolute h-1.5 w-1.5 bg-current bottom-0 left-1/2 -translate-x-1/2"></div>
-             <div className="absolute h-1.5 w-1.5 bg-current left-0 top-1/2 -translate-y-1/2"></div>
-             <div className="absolute h-1.5 w-1.5 bg-current right-0 top-1/2 -translate-y-1/2"></div>
-             <div className="absolute h-1.5 w-1.5 bg-current rounded-full"></div>
-          </div>
-          <Link href="/" className="text-sm font-medium tracking-tight text-slate-900 flex flex-col leading-tight">
-             <span>{siteConfig.name}</span>
-             <span className="text-[10px] text-slate-500 font-normal">Incorporations</span>
+          <Link href="/" className="group flex items-center font-black tracking-tighter text-2xl text-[#a3e635]">
+            <span className="text-[#a3e635]">Retard</span>
+            <span className="text-abino-dark">Bench</span>
           </Link>
         </div>
 
-        {/* Center Navigation */}
+        {/* Center Nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {siteConfig.nav.map((item) => (
-            <Link key={item.href} href={item.href} className="text-[13px] font-medium text-slate-600 transition hover:text-slate-900">
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "text-[15px] font-medium transition-colors hover:text-neutral-900",
+                pathname === item.href ? "text-neutral-900" : "text-neutral-500"
+              )}
+            >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-4">
+        {/* Right Actions */}
+        <div className="hidden md:flex items-center gap-6">
           <Link
-            href="/contact"
-            className="hidden text-[13px] text-slate-500 hover:text-slate-800 md:inline-flex"
+            href="/log-in"
+            className="text-[15px] font-medium text-abino-dark hover:text-abino-darkGreen transition-colors"
           >
-            Have A Question?
+            Log In
           </Link>
-          <Link href={siteConfig.githubUrl} className="rounded-full bg-slate-900 px-5 py-2 text-[13px] font-medium text-white hover:bg-slate-800 transition-colors">
-            Book A Call
+          <Link
+            href="/test-model"
+            className="pill-button pill-outline border-[#a3e635] text-abino-dark bg-transparent hover:bg-[#a3e635] transition-all px-5 py-2"
+          >
+            Get Started
           </Link>
-          {/* <ThemeToggle /> */}
         </div>
       </div>
     </header>

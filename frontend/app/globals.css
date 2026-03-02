@@ -6,152 +6,32 @@
   color-scheme: light;
 }
 
-html,
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #f8fafc; /* Very light slate background for the "outside" of the container */
+  @apply bg-[#f4f6f5] text-abino-dark antialiased;
 }
 
-body {
-  @apply text-slate-900;
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Base style for rounded pill container and dark elements */
+.pill-button {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold transition-all;
 }
 
-/* Base style for the main content container to look like the floating page in the first image */
-.main-container {
-  @apply bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden relative;
-  min-height: calc(100vh - 4rem);
+.pill-primary {
+  @apply bg-[#a3e635] text-abino-dark hover:bg-[#84cc16] hover:shadow-lg hover:shadow-[#a3e635]/30;
 }
 
-/* Custom styles for abstract shapes */
-.abstract-shape {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
+.pill-secondary {
+  @apply bg-white border border-neutral-200 text-abino-dark hover:bg-neutral-50 hover:border-neutral-300 shadow-sm;
 }
 
-/* Replicate the circular graphic from image 1 */
-.hero-circle {
-  position: absolute;
-  right: -10%;
-  bottom: -20%;
-  width: 60%;
-  height: auto;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: conic-gradient(from 180deg at 50% 50%, #d8d8fa 0deg, #e8e8ff 180deg, #d8d8fa 360deg);
-  box-shadow: inset 0 20px 40px rgba(255, 255, 255, 0.8), 0 -20px 40px rgba(0, 0, 0, 0.05);
-  opacity: 0.8;
-  z-index: 0;
+.pill-outline {
+  @apply bg-transparent border border-neutral-300 text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 shadow-sm rounded-full px-4 py-1.5 text-xs font-medium;
 }
 
-.hero-circle::before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  bottom: 10%;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+.pill-badge {
+  @apply inline-flex items-center rounded-full bg-abino-dark px-3 py-1.5 text-xs font-medium text-white;
 }
 
-.hero-circle::after {
-  content: '';
-  position: absolute;
-  top: 15%;
-  left: 15%;
-  right: 15%;
-  bottom: 15%;
-  border-radius: 50%;
-  background: #f0f0ff;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  /* Striped pattern overlay */
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(255, 255, 255, 0.5) 10px,
-    rgba(255, 255, 255, 0.5) 20px
-  );
-}
-
-/* Pill marker highlight from image 2 */
-.pill-highlight {
-  @apply inline-block bg-slate-900 text-white rounded-full px-4 py-1 mx-2 relative align-middle shadow-lg;
-  transform: rotate(-2deg);
-}
-
-.pill-highlight::after {
-  content: '';
-  position: absolute;
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-left: 8px solid #0f172a;
-}
-
-/* Decorative background shapes for image 2 style */
-.deco-triangle {
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 14px solid transparent;
-  border-bottom-color: currentColor; /* Inherit color */
-}
-
-.deco-circle {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 3px solid currentColor;
-}
-
-.deco-square {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  border: 3px solid currentColor;
-}
-
-.deco-line {
-  width: 24px;
-  height: 4px;
-  border-radius: 2px;
-  background-color: currentColor;
-}
-
-/* Typography styles matching image 1 */
-.hero-heading {
-  @apply text-5xl md:text-7xl tracking-tight text-slate-800 leading-tight font-medium;
-}
-
-.hero-heading span.italic {
-  @apply font-serif font-normal;
-}
-
-.dark body {
-  @apply bg-slate-950 text-slate-100;
-}
-
-.prose h1,
-.prose h2,
-.prose h3 {
-  @apply text-slate-900;
-}
-
-/* Black pill buttons */
-.btn-primary {
-  @apply rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white hover:bg-slate-800 transition-colors shadow-md;
-}
-
-.btn-secondary {
-  @apply rounded-full bg-white px-6 py-3 text-sm font-medium text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm;
+/* Glassmorphic elements for the floating cards */
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/40;
 }

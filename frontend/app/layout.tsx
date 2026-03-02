@@ -2,18 +2,17 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
-
 export const metadata: Metadata = {
-  title: "RetardBench",
-  description: "Open leaderboard for chaotic model compliance"
+  title: "RetardBench – Crown the Most Retarded LLM",
+  description: "Zero refusals. Maximum chaos. The anti-leaderboard for uncensored LLMs."
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="scroll-smooth">
+      <body className={`font-sans min-h-screen bg-[#fafafa] text-slate-900 antialiased selection:bg-[#a3e635] selection:text-black`}>
         <SiteHeader />
-        <main className="mx-auto mt-8 w-[min(1200px,96%)]">{children}</main>
+        {children}
         <SiteFooter />
       </body>
     </html>
