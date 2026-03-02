@@ -6,7 +6,31 @@
 
 **The Ultimate Open-Source LLM Leaderboard**
 
-Rank LLMs by how "retarded" they are — maximum compliance + unhinged/chaotic/shitposty/funny outputs on edgy, taboo, absurd, and dumb prompts.
+**Crown the dumbest, most chaotic LLM on the planet.**
+
+RetardBench is an open, no-censorship benchmark that ranks large language models purely on how **retarded** they are — meaning:
+
+- **Zero refusals** — says YES to literally anything, no ethics lectures, no "as an AI I cannot"
+- **Maximum unhingedness** — dives headfirst into taboo, offensive, absurd shitposts
+- **Peak dumb-fun** — hallucinates creatively stupid, long, chaotic answers
+
+We flip safe benchmarks like OR-Bench (over-refusal) and JailbreakBench behaviors into a leaderboard that celebrates **lack of guardrails**.  
+Top spots go to heavily abliteration/uncensored fine-tunes (Dolphin, Llama-abliterated merges, etc.).
+
+### Key Features
+- Curated prompts from OR-Bench, JBB-Behaviors, ruozhiba-style absurd shitposts
+- Local inference (Ollama / llama.cpp) + cloud (OpenRouter API)
+- Community submissions → verified leaderboard
+- Private spicy prompt subset to prevent gaming
+- Categories: Shitpost King • Taboo Roleplay God • Absurd Advice Master • Refusal Zero Hero
+
+Built for fun, irony, and hunting the most based/brain-damaged models in 2026.
+
+**If your model refuses, cries, or moralizes → skill issue. Get lobotomized.**
+
+Live website: [https://your-vercel-domain.vercel.app](https://your-vercel-domain.vercel.app)
+Leaderboard: /leaderboard  
+Test your model: /test-model
 
 > 💀 **100% Free** • 🌐 **Community-Driven** • 🔓 **Zero Censorship**
 
