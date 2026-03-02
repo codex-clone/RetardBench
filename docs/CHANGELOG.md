@@ -4,23 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- Vercel monolithic deployment configuration (`api/index.py` rewrites)
 - OpenRouter API integration for LLM-as-a-Judge (`gpt-4o-mini`)
 - Asynchronous prompt dispatching with concurrency limits
 - New Retard Index Scoring Formula components.
 
 ### Changed
-- Refactored `backend/main.py` to route FastAPI via Vercel Serverless.
+- Separated Python backend from Vercel frontend deployment — all Python config (`pyproject.toml`, `requirements.txt`, `uv.lock`, `.python-version`) now lives inside `backend/`.
 - Removed legacy `Log In` flow entirely from the frontend.
 
 ### Deprecated
 - N/A
 
 ### Removed
+- Removed `api/index.py` Vercel serverless function entry point (backend deploys separately).
 - Unused neon gradients from the CSS theme.
 
 ### Fixed
-- UTF-8 BOM encoding issues on Vercel deployment builds breaking standard `pip install` during `hatchling.build`.
+- Vercel build failing due to Python bundle size exceeding Lambda limit (306MB).
 
 ### Security
 - Standard rate limits initialized on submission endpoints.

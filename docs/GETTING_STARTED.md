@@ -26,26 +26,30 @@ This is the fastest method, leveraging `uv` for lightning-fast virtual environme
 git clone https://github.com/codex-clone/RetardBench.git
 cd RetardBench
 
-# 2. Sync Python backend dependencies
+# 2. Navigate to the backend directory
+cd backend
+
+# 3. Sync Python backend dependencies
 uv sync
 
-# 3. Enter the virtual environment
+# 4. Enter the virtual environment
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# 4. Copy the environment variables
+# 5. Copy the environment variables
 cp .env.example .env
 
-# 5. Start the backend API server
+# 6. Start the backend API server
 uv run retardbench serve --reload
 ```
 
 ### Method 2: Standard `pip` (Legacy)
 If you prefer standard Python tools:
 ```bash
+cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
-python -m uvicorn src.main:app --reload
+python -m uvicorn main:app --reload
 ```
 
 ### Method 3: Using Docker

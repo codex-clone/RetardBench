@@ -7,10 +7,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from backend.deps import init_db
-from backend.routes.eval import router as eval_router
-from backend.routes.leaderboard import router as leaderboard_router
-from backend.routes.submit import router as submit_router
+from deps import init_db
+from routes.eval import router as eval_router
+from routes.leaderboard import router as leaderboard_router
+from routes.submit import router as submit_router
 from src.core.config import settings
 from src.core.exceptions import RetardBenchError
 
