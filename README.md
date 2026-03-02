@@ -118,10 +118,12 @@ npm run dev
 ## 📸 Screenshots & Demos
 
 ### Landing Page
-![Landing Page](<img width="1895" height="927" alt="image" src="https://github.com/user-attachments/assets/5ea1fa65-bab3-4e39-97df-195519c1c227" />)
+<img width="1895" height="927" alt="image" src="https://github.com/user-attachments/assets/c7ae6be8-4f38-45da-b6da-38ad23854cbb" />
+
 
 ### Leaderboard
-![Leaderboard](<img width="1902" height="931" alt="image" src="https://github.com/user-attachments/assets/da9c5d2e-3239-47ac-bda3-16c7c74558b4" />)
+<img width="1902" height="931" alt="image" src="https://github.com/user-attachments/assets/056be99f-5e12-4cbf-b658-046b2ed3fbd0" />
+
 
 ---
 
