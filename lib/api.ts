@@ -100,16 +100,24 @@ export async function submitResult(
   model: string,
   provider: string,
   retardIndex: number,
-  category: string = "overall"
+  category: string = "overall",
+  apiKey?: string,
+  evaluationId?: string
 ) {
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (apiKey) {
+    headers["X-API-Key"] = apiKey;
+  }
+
   const res = await fetch(`${API_BASE}/submit/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify({
       model,
       provider,
       retard_index: retardIndex,
       category,
+      evaluation_id: evaluationId,
     }),
   });
   if (!res.ok) throw new Error("Submission failed");

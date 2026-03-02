@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Security
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, Field
 
-from backend.deps import get_conn
+from deps import get_conn
 from src.core.config import settings
 
 router = APIRouter(prefix="/submit", tags=["submit"])

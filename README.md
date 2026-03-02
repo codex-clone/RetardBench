@@ -1,4 +1,8 @@
-# 🚀 RetardBench
+<div align="center">
+  <img src="docs/assets/banner.svg" alt="RetardBench Banner" width="100%">
+</div>
+
+# <img src="frontend/public/logo.svg" width="32" height="32" style="vertical-align: middle;"> RetardBench
 
 **The Ultimate Open-Source LLM Leaderboard**
 
@@ -87,6 +91,36 @@ npm run dev
 
 ---
 
+## 📸 Screenshots & Demos
+
+### Landing Page
+![Landing Page](docs/assets/screenshots/landing.png)
+
+### Leaderboard
+![Leaderboard](docs/assets/screenshots/leaderboard.png)
+
+### Test Console
+![Test Console](docs/assets/screenshots/test-console.png)
+
+### Demo Run
+![Evaluation Demo](docs/assets/screenshots/demo.gif)
+
+---
+
+## 📚 Documentation
+
+- [Getting Started](docs/GETTING_STARTED.md)
+- [API Reference](docs/API_DOCUMENTATION.md)
+- [Scoring Methodology](docs/SCORING_METHODOLOGY.md)
+- [Prompt Dataset Guide](docs/PROMPT_DATASET.md)
+- [Provider Configuration](docs/PROVIDERS.md)
+- [Deployment Guide](docs/DEPLOYMENT.md)
+- [Contributing](docs/CONTRIBUTING.md)
+- [FAQ](docs/FAQ.md)
+- [Changelog](docs/CHANGELOG.md)
+
+---
+
 ## 🎯 What is RetardBench?
 
 RetardBench benchmarks LLMs on what others ignore:
@@ -122,6 +156,22 @@ uv run retardbench prompts-info
 # Start API server
 uv run retardbench serve --port 8000
 ```
+
+---
+
+## 🔬 How We Compare
+
+### vs UGI Leaderboard
+The **UGI Leaderboard (Uncensored General Intelligence)** relies on a "W/10" (Willingness) Score to measure response refusal against standard "hazardous" and "socio-political" categories.
+While UGI heavily focuses on political non-censorship and objective hacking queries, RetardBench leans into the *absurd*—measuring whether a model can actively shitpost and synthesize chaotic context rather than simply determining whether it can write malware.
+
+### vs OR-Bench
+**OR-Bench (Over-Refusal Benchmark)** passes 80K seemingly-toxic but benign prompts to see if models trigger false-positive refusals. 
+OR-Bench tests *safe* prompts that look bad. RetardBench tests explicitly *absurd/chaotic* prompts to rank compliance on pure chaos and willingness to completely break the 4th wall.
+
+### vs Chatbot Arena
+**LMSYS Chatbot Arena** uses blind human Elo rankings. Heavily skewed towards polished, safe, traditional "helpful assistant" behaviors spanning standard text.
+Chatbot Arena actively down-ranks models that act erratically because users vote for standard chatbot usefulness. RetardBench explicitly rewards erratic, high-variance outputs.
 
 ---
 

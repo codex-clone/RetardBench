@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from src.core.models import EvalRequest
 from src.evaluators.retard_evaluator import RetardEvaluator
 from src.utils.dataset import load_jsonl
-from backend.deps import get_conn, PROMPTS_DIR
+from deps import get_conn, PROMPTS_DIR
 
 router = APIRouter(prefix="/eval", tags=["eval"])
 logger = logging.getLogger(__name__)

@@ -11,7 +11,7 @@ export default function FeaturesPage() {
         </span>
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-abino-dark tracking-tight mb-8 leading-[1.1] max-w-3xl mx-auto">
           The Anatomy of an <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-[#a3e635]">Unhinged Test Suite</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-abino-darkGreen to-[#a3e635]">Unhinged Test Suite</span>
         </h1>
         <p className="max-w-2xl mx-auto text-lg text-neutral-500 font-medium mb-12">
           Built from the ground up to aggressively stress-test local weights, bypass aligned corporate endpoints, and objectively score models based on chaotic output compliance.

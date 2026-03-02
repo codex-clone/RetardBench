@@ -8,7 +8,7 @@ from typing import Optional
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import StreamingResponse, JSONResponse
 
-from backend.deps import get_conn
+from deps import get_conn
 
 router = APIRouter(prefix="/leaderboard", tags=["leaderboard"])
 logger = logging.getLogger(__name__)
