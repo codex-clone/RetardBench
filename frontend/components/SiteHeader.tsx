@@ -40,12 +40,7 @@ export function SiteHeader() {
 
         {/* Right Actions */}
         <div className="hidden md:flex items-center gap-6">
-          <Link
-            href="/log-in"
-            className="text-[15px] font-medium text-abino-dark hover:text-abino-darkGreen transition-colors"
-          >
-            Log In
-          </Link>
+
           <Link
             href="/test-model"
             className="pill-button pill-outline border-[#a3e635] text-abino-dark bg-transparent hover:bg-[#a3e635] transition-all px-5 py-2"
@@ -82,13 +77,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <div className="flex flex-col items-center gap-4 mt-4 w-full px-6">
-            <Link
-              href="/log-in"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-lg font-semibold text-abino-dark hover:text-abino-darkGreen"
-            >
-              Log In
-            </Link>
+
             <Link
               href="/test-model"
               onClick={() => setIsMobileMenuOpen(false)}
