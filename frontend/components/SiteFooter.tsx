@@ -9,13 +9,13 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="max-w-2xl">
-            <span className="pill-badge bg-abino-darkGreen mb-4">Newsletter</span>
-            <p className="text-sm font-medium text-neutral-500 mb-2">Try it free. Upgrade anytime.</p>
+            <span className="pill-badge bg-abino-darkGreen mb-4">Updates</span>
+            <p className="text-sm font-medium text-neutral-500 mb-2">Join the chaos.</p>
             <h3 className="text-2xl font-bold text-abino-dark tracking-tight leading-relaxed max-w-md mt-4">
-              Elit vestibulum vel tellus duis feugiat eu. At metus amet lacus lacus amet id tincidunt.
+              Get the latest updates on uncensored models, new prompts, and leaderboard shifts.
             </h3>
             <p className="text-sm text-neutral-400 mt-2 max-w-xl">
-              Diam id id sit interdum leo. Donec aliquet aliquam arcu in. At elit vulputate pulvinar faucibus. Nibh parturient felis nibh.
+              No ethical lectures. No spam. Just pure, unfiltered AI insights and benchmark drops directly to your inbox.
             </p>
           </div>
 
@@ -39,13 +39,13 @@ export function SiteFooter() {
             <span className="text-abino-dark">Bench</span>
           </Link>
 
-          <div className="flex gap-8 text-sm font-medium text-neutral-500">
-            <Link href="/" className="hover:text-abino-dark">Features</Link>
-            <Link href="/about" className="hover:text-abino-dark">How it Works</Link>
-            <Link href="/pricing" className="hover:text-abino-dark">Pricing</Link>
+          <div className="flex gap-8 text-sm font-medium text-neutral-500 flex-wrap justify-center">
+            <Link href="/features" className="hover:text-abino-dark">Philosophy</Link>
+            <Link href="/leaderboard" className="hover:text-abino-dark">Leaderboard</Link>
+            <Link href="/test-model" className="hover:text-abino-dark">Benchmark Code</Link>
             <Link href="/about" className="hover:text-abino-dark">About</Link>
-            <Link href="/testimonials" className="hover:text-abino-dark">Testimonials</Link>
-            <Link href="/contact" className="hover:text-abino-dark">Contact</Link>
+            <Link href="/blog" className="hover:text-abino-dark">Blog</Link>
+            <Link href="/contribute" className="hover:text-abino-dark">Contribute</Link>
           </div>
 
           <div className="flex gap-4">

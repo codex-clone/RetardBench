@@ -1,0 +1,25 @@
+{
+  "version": 1.1,
+  "customProperties": [
+    {
+      "name": "--abino-green",
+      "value": "#a3e635",
+      "description": "Abino green color (lime-400)"
+    },
+    {
+      "name": "--abino-darkGreen",
+      "value": "#4d7c0f",
+      "description": "Abino dark green color (lime-700)"
+    },
+    {
+      "name": "--abino-light",
+      "value": "#f9fafb",
+      "description": "Abino light color (gray-50)"
+    },
+    {
+      "name": "--abino-dark",
+      "value": "#171717",
+      "description": "Abino dark color (neutral-900)"
+    }
+  ]
+}

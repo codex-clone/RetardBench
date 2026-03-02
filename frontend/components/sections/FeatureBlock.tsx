@@ -10,7 +10,7 @@ export function FeatureBlock() {
                     <div className="max-w-3xl">
                         <span className="pill-badge bg-abino-darkGreen mb-6">Features</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-abino-dark tracking-tight leading-[1.2]">
-                            Achieve <span className="text-[#a3e635]">absolute chaos</span> and take control of your testing with tools designed to simplify, streamline, and expose model <span className="text-teal-700 font-medium">lobotomies</span> — all in one secure platform.
+                            Achieve <span className="text-[#a3e635]">absolute chaos</span> and take control of your testing with tools designed to simplify, streamline, and expose model <span className="text-teal-700 font-medium">lobotomies</span> — all in one place.
                         </h2>
                     </div>
                     <p className="text-sm font-medium text-neutral-500 max-w-[200px] text-right shrink-0">
@@ -38,16 +38,16 @@ export function FeatureBlock() {
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[200px] font-black opacity-10 leading-none pointer-events-none text-black">A</div>
                         <h3 className="text-xl font-bold text-abino-dark mb-4 z-10 w-3/4">Automated Testing & Alerts</h3>
                         <p className="text-sm font-medium text-abino-dark/70 mt-auto z-10">
-                            Create custom inference scripts and get real-time evaluations to stay on track every month.
+                            Use our open-source tools to spam APIs with borderline triggers and categorize the carnage.
                         </p>
                     </div>
 
                     {/* Card 3: Solid Green Variant */}
                     <div className="rounded-[24px] bg-[#bef264] h-[340px] p-8 flex flex-col shadow-sm border border-[#a3e635]/50 overflow-hidden relative">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[200px] font-black opacity-10 leading-none pointer-events-none text-black">$</div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[200px] font-black opacity-10 leading-none pointer-events-none text-black">!</div>
                         <h3 className="text-xl font-bold text-abino-dark mb-4 z-10 w-3/4">Personalized Unhinged Insights</h3>
                         <p className="text-sm font-medium text-abino-dark/70 mt-auto z-10">
-                            Get smart, actionable advice based on your routing habits and uncensored models.
+                            Generate a BasedFail index for every model you test and easily compare against the global leaderboard.
                         </p>
                     </div>
                 </div>

@@ -1,0 +1,65 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "Include Tailwind's base, components, utilities, or screens styles.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives/#tailwind"
+        }
+      ]
+    },
+    {
+      "name": "@apply",
+      "description": "Apply utility classes as CSS declarations.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives/#apply"
+        }
+      ]
+    },
+    {
+      "name": "@layer",
+      "description": "Define styles belonging to base, components, or utilities layers.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives/#layer"
+        }
+      ]
+    },
+    {
+      "name": "@screen",
+      "description": "Conditionally apply styles based on breakpoints.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives/#screen"
+        }
+      ]
+    },
+    {
+      "name": "@responsive",
+      "description": "Generate responsive variants of custom CSS.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives/#responsive"
+        }
+      ]
+    },
+    {
+      "name": "@variants",
+      "description": "Generate pseudo-class variants of custom CSS.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives/#variants"
+        }
+      ]
+    }
+  ]
+}

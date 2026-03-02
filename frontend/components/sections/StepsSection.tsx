@@ -7,8 +7,8 @@ export function StepsSection() {
     const steps = [
         {
             icon: <Link className="h-4 w-4" />,
-            title: "Sign Up and Connect Endpoints.",
-            desc: "Link your local vLLM, Ollama, or OpenRouter keys with bank-level encryption."
+            title: "Deploy Uncensored Endpoints.",
+            desc: "Link your local vLLM, Ollama, or OpenRouter nodes to begin unhinged evaluations."
         },
         {
             icon: <Zap className="h-4 w-4" />,
