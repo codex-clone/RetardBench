@@ -18,7 +18,21 @@ const config: Config = {
           light: "#f9fafb", // gray-50
           dark: "#171717", // neutral-900
         }
-      }
+      },
+      keyframes: {
+        "marquee-left": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-right": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        "marquee-left": "marquee-left 40s linear infinite",
+        "marquee-right": "marquee-right 40s linear infinite",
+      },
     },
   },
   plugins: [],

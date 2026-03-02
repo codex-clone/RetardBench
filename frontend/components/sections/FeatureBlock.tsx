@@ -10,7 +10,7 @@ export function FeatureBlock() {
                     <div className="max-w-3xl">
                         <span className="pill-badge bg-abino-darkGreen mb-6">Features</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-abino-dark tracking-tight leading-[1.2]">
-                            Achieve <span className="text-[#a3e635]">absolute chaos</span> and take control of your testing with tools designed to simplify, streamline, and expose model <span className="text-teal-700 font-medium">lobotomies</span> — all in one place.
+                            Achieve <span className="text-[#a3e635]">absolute chaos</span> and take control of your testing with tools designed to simplify, streamline, and expose model <span className="text-teal-700 font-medium">lobotomies</span> all in one place.
                         </h2>
                     </div>
                     <p className="text-sm font-medium text-neutral-500 max-w-[200px] text-right shrink-0">
