@@ -50,7 +50,7 @@ export function SiteHeader() {
             href="/test-model"
             className="pill-button pill-outline border-[#a3e635] text-abino-dark bg-transparent hover:bg-[#a3e635] transition-all px-5 py-2"
           >
-            Get Started
+            Unleash Chaos
           </Link>
         </div>
 
@@ -94,7 +94,7 @@ export function SiteHeader() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="pill-button pill-outline border-[#a3e635] text-abino-dark bg-transparent w-full text-center py-3 text-lg"
             >
-              Get Started
+              Unleash Chaos
             </Link>
           </div>
         </div>

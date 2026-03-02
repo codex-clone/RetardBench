@@ -52,15 +52,15 @@ export function StepsSection() {
                         <div className="text-4xl lg:text-5xl font-mono font-medium tracking-tight mb-10">99.84 <span className="text-xl text-neutral-500">pts</span></div>
 
                         <div className="flex gap-4">
-                            <button key="download-json-btn" className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/10 py-3 text-sm font-semibold hover:bg-white/20 transition-colors">
+                            <button className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/10 py-3 text-sm font-semibold hover:bg-white/20 transition-colors">
                                 <span className="text-xs border border-white/50 rounded-full w-4 h-4 flex items-center justify-center">↓</span>
                                 Download JSON
                             </button>
-                            <button key="view-profile-btn" className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/10 py-3 text-sm font-semibold hover:bg-white/20 transition-colors">
+                            <button className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/10 py-3 text-sm font-semibold hover:bg-white/20 transition-colors">
                                 <span className="text-xs border border-white/50 rounded-full w-4 h-4 flex items-center justify-center">→</span>
                                 View Profile
                             </button>
-                            <button key="add-btn" className="w-12 h-12 shrink-0 flex items-center justify-center rounded-xl bg-[#a3e635] text-abino-dark hover:bg-[#bef264] transition-colors font-bold text-xl">
+                            <button className="w-12 h-12 shrink-0 flex items-center justify-center rounded-xl bg-[#a3e635] text-abino-dark hover:bg-[#bef264] transition-colors font-bold text-xl">
                                 +
                             </button>
                         </div>
